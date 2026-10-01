@@ -673,7 +673,7 @@ func (s *Gopher) processTaskWithSourceAdapters(task *GopherTask, allowFallbackDo
 		}
 		if !handled {
 			// Shared handling can fall back to the Direct deletion path.
-			if storageType == storage.StorageTypeOCI || storageType == storage.StorageTypeHuggingFace {
+			if isDirectFileStorageType(storageType) {
 				acquired, err := s.tryLockDirectModelPath(ctx, getDestPath(&baseModelSpec, s.modelRootDir))
 				if err != nil {
 					return err
